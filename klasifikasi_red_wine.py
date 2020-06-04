@@ -79,3 +79,26 @@ svc.fit(X_train, y_train)
 pred_svc = svc.predict(X_test)
 
 print(classification_report(y_test, pred_svc))
+
+
+#Metrics otomatis
+#accuracy
+accuracy = accuracy_score(y_test, pred_svc)
+print("accuracy = ",accuracy)
+
+#precision
+precision = precision_score(y_test, pred_svc)
+print("precision = ",precision)
+
+
+#Metrics manual
+print("Confustion Matrix")
+print(confusion_matrix(y_test, pred_svc))
+
+#accuracy
+accuracy_manual = (268+12) / (268+12+5+35)
+print("accuracy = ", accuracy_manual)
+
+#precision
+precision_manual = 12 / (12+5)
+print("precision = ", precision_manual)
