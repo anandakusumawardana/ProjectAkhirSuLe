@@ -61,6 +61,7 @@ dataset['quality'] = label_quality.fit_transform(dataset['quality'])
 sns.countplot(dataset['quality'])
 
 X = dataset.drop('quality', axis=1)
+y = dataset['quality']
 
 dataset['quality'].value_counts()
 
@@ -78,4 +79,3 @@ svc.fit(X_train, y_train)
 pred_svc = svc.predict(X_test)
 
 print(classification_report(y_test, pred_svc))
-y = dataset['quality']
