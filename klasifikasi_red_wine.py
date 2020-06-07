@@ -102,3 +102,33 @@ print("accuracy = ", accuracy_manual)
 #precision
 precision_manual = 12 / (12+5)
 print("precision = ", precision_manual)
+
+
+#Evaluasi dan Perbaikan menggunakan GridSearchCV
+param = {
+    'C': [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4],
+    'kernel':['linear', 'rbf'],
+    'gamma' :[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4]
+}
+grid_svc = GridSearchCV(svc, param_grid=param, scoring='accuracy', n_jobs=-1)
+
+grid_svc.fit(X_train, y_train)
+#Mengambil parameter terbaik
+print(grid_svc.best_params_)
+
+#Lakukan ulang dengan parameter terbaik dari hasil GridSearch
+# SVC optimized
+svc2 = SVC(gamma=1.1, C=1.1, kernel='rbf')
+svc2.fit(X_train, y_train)
+pred_svc2 = svc2.predict(X_test)
+
+print(classification_report(y_test, pred_svc2))
+
+#Metrics otomatis setelah optimasi
+#accuracy
+accuracy2 = accuracy_score(y_test, pred_svc2)
+print("accuracy = ",accuracy2)
+
+#precision
+precision2 = precision_score(y_test, pred_svc2)
+print("precision = ",precision2)
